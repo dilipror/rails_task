@@ -1,0 +1,52 @@
+<div>
+  <h1> Charges </h1>
+</div>
+<%= link_to "New Charge",  new_charge_path %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Customer Name</th>
+      <th>Amount</th>
+      <th>Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr >
+      <td colspan="5"><h1> Failed Charges </h1></td>
+    </tr>
+
+    <% @charges[:failed].each do |charge| %>
+      <tr class="failed">
+        <td><%= charge.customer.first_name %></td>
+        <td><%= humanized_money_with_symbol charge.amount %></td>
+        <td><%= charge.created_at.strftime("%B %d %Y") %></td>
+      </tr>
+    <% end %>
+    <tr >
+      <td colspan="5"><h1> Dispute Charges </h1></td>
+    </tr>
+
+    <% @charges[:disputed].each do |charge| %>
+      <tr class="dispute">
+        <td><%= charge.customer.first_name %></td>
+        <td><%= humanized_money_with_symbol charge.amount %></td>
+        <td><%= charge.created_at.strftime("%B %d %Y") %></td>
+      </tr>
+    <% end %>
+
+    <tr >
+      <td colspan="5"><h1> Successful Charges </h1></td>
+    </tr>
+    <% @charges[:success].each do |charge| %>
+      <tr>
+        <td><%= charge.customer.first_name %></td>
+        <td><%= humanized_money_with_symbol charge.amount %></td>
+        <td><%= charge.created_at.strftime("%B %d %Y") %></td>
+      </tr>
+    <% end %>
+
+  </tbody>
+</table>
+
+

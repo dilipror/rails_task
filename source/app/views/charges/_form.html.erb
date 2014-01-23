@@ -1,0 +1,7 @@
+<%= simple_form_for(@charge || Charge.new) do |f| %>
+  <%= f.association :customer , collection: Customer.all.map {|c| [c.first_name ,c.id ] } , prompt: "Select Customer", required: true %>
+  <%= f.input :amount, required: true %>
+  <%= f.input :amount_currency , collection:  ["USD", "GBP", "EUR", "INR"] ,  prompt: "Select Currency", required: true%>
+  <%= f.submit %>
+<% end %>
+<%= link_to "Cancel",  charges_path %>
